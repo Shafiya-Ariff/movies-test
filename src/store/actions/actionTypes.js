@@ -1,0 +1,8 @@
+export const GET_USERS = 'GET_USERS';
+export const GET_USERS_FAIL = 'GET_USERS_FAIL';
+
+export const GET_ACCOUNTS = 'GET_ACCOUNTS';
+export const GET_ACCOUNTS_FAIL = 'GET_ACCOUNTS_FAIL';
+
+export const CHANGE_RATING = 'CHANGE_RATING';
+export const CHANGE_RATING_FAIL = 'CHANGE_RATING_FAIL';
