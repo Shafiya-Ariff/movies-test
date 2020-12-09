@@ -3,16 +3,17 @@ import * as actions from '../../store/actions/index';
 
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import Spinner from '../UI/Spinner/Spinner';
+import Card from '../UI/Card/Card';
 
 export const App = (props) => {
 
     useEffect(() => {
         props.getUsers();
     }, []);
+
 
     return (
         <div>
@@ -22,21 +23,12 @@ export const App = (props) => {
                         <Row>
                             {Object.values(props.users).map(user => (
                                 <Col key={user.account} sm={6} md={6} xl={4} lg={4}>
-                                    <Card style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", width: '18rem', margin: "20px" }}>
-                                        <div style={{ height: "200px" }}>
-                                            <Card.Img style={{ maxHeight: "100%" }} variant="top" src={user.image} />
-                                        </div>
-                                        <Card.Body className="text-center">
-                                            <Card.Title>{user.name}</Card.Title>
-                                            <div>
-                                                <Link to={"/show/" + user.account} className="mr-2 btn btn-success btn-sm">Show</Link>
-                                            </div>
-                                        </Card.Body>
-                                    </Card>
+                                    <Card image={user.image} name={user.name} account={user.account} type="dashboard" />
                                 </Col>
                             ))}
                         </Row>
-                    </Container> :
+                    </Container>
+                    :
                     <div className="errorMessageBox container">
                         No users found!
                     </div>

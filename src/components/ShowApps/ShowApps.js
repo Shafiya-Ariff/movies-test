@@ -3,10 +3,10 @@ import * as actions from '../../store/actions/index';
 
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Row, Col } from 'react-bootstrap';
-import StarRatings from 'react-star-ratings';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import Spinner from '../UI/Spinner/Spinner';
+import Card from '../UI/Card/Card';
 
 export const ShowApps = (props) => {
 
@@ -16,10 +16,6 @@ export const ShowApps = (props) => {
 
     const acc = props.account || {};
 
-    const changeRating = (newRating, name) => {
-        props.changeRating(props.match.params.account, name, newRating);
-    }
-
     return (
         <div>
             {props.loading ? <Spinner /> :
@@ -28,28 +24,13 @@ export const ShowApps = (props) => {
                         <Row>
                             {Object.entries(acc).map(([key, acc]) => (
                                 <Col key={key} sm={6} md={6} xl={4} lg={4}>
-                                    <Card style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", width: '18rem', margin: "20px" }}>
-                                        <div style={{ height: "200px" }}>
-                                            <Card.Img style={{ maxHeight: "100%" }} variant="top" src={acc.image} />
-                                        </div>
-                                        <Card.Body className="text-center">
-                                            <Card.Title>{acc.title}</Card.Title>
-                                            <StarRatings
-                                                starRatedColor="gold"
-                                                numberOfStars={5}
-                                                name={key}
-                                                rating={acc.rating}
-                                                starDimension="20px"
-                                                changeRating={changeRating}
-                                            />
-                                        </Card.Body>
-                                    </Card>
+                                    <Card image={acc.image} name={acc.title} rating={acc.rating} cardKey={key} account={props.match.params.account} type="apps" />
                                 </Col>
                             ))}
                         </Row>
                     </Container> :
                     <div className="errorMessageBox container">
-                        No users found!
+                        No apps found!
                     </div>
             }
         </div>
@@ -68,7 +49,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAccounts: (account) => dispatch(actions.getAccounts(account)),
-        changeRating: (account, app, rating) => dispatch(actions.changeRating(account, app, rating)),
     }
 }
 
