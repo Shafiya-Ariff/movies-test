@@ -1,6 +1,3 @@
-// import './App.css';
-import * as actions from '../../store/actions/index';
-
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,12 +5,15 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Spinner from '../UI/Spinner/Spinner';
 import Card from '../UI/Card/Card';
 import ErrorBox from '../ErrorBox/ErrorBox';
+import * as actions from '../../store/actions/index';
 
 export const ShowApps = (props) => {
 
+    const { getAccounts } = props;
+
     useEffect(() => {
-        props.getAccounts(props.match.params.account);
-    }, [props.app]);
+        getAccounts(props.match.params.account);
+    }, [getAccounts, props.match.params.account, props.app]);
 
     const acc = props.account || {};
 

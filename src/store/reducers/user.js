@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.GET_USERS:
             return {
                 ...state,
-                error: [],
+                error: null,
                 users: action.users,
                 loading: false
             }
