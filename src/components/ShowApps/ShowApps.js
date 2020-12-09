@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import Spinner from '../UI/Spinner/Spinner';
 import Card from '../UI/Card/Card';
+import ErrorBox from '../ErrorBox/ErrorBox';
 
 export const ShowApps = (props) => {
 
@@ -29,9 +30,7 @@ export const ShowApps = (props) => {
                             ))}
                         </Row>
                     </Container> :
-                    <div className="errorMessageBox container">
-                        No apps found!
-                    </div>
+                    <ErrorBox>No Apps Found!</ErrorBox>
             }
         </div>
     )
